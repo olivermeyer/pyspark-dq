@@ -1,0 +1,7 @@
+derby.log
+
+metastore_db/*
+spark-warehouse/*
+venv/*
+.idea/*
+__pycache__/
