@@ -11,6 +11,7 @@ class CheckOperator:
         dataframe: DataFrame,
     ) -> None:
         self.dataframe = dataframe
+        self.input_columns = dataframe.columns
         self.checks = []
         self.validation_columns = []
         self.validated = False
@@ -44,7 +45,7 @@ class CheckOperator:
     def run_and_return(self) -> Tuple[DataFrame, DataFrame]:
         self.run_checks()
         return (
-            self.valid_rows.drop(*self.validation_columns),
+            self.valid_rows.select(self.input_columns),
             self.invalid_rows
         )
 
