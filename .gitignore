@@ -5,3 +5,6 @@ spark-warehouse/*
 venv/*
 .idea/*
 __pycache__/
+build/
+dist/
+pysparkdq.egg-info/

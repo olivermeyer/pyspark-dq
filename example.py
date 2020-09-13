@@ -1,13 +1,11 @@
 from pyspark.sql import SparkSession
 
 from pysparkdq.operator import CheckOperator
-from pysparkdq.checks import (
-    ColumnIsNotNullCheck,
-    ColumnIsPositiveCheck,
-    ColumnIsInValuesCheck,
-    ColumnIsInRangeCheck,
-    ColumnSetIsUniqueCheck
-)
+from pysparkdq.checks.is_not_null import ColumnIsNotNullCheck
+from pysparkdq.checks.is_positive import ColumnIsPositiveCheck
+from pysparkdq.checks.is_in_values import ColumnIsInValuesCheck
+from pysparkdq.checks.is_in_range import ColumnIsInRangeCheck
+from pysparkdq.checks.is_unique import ColumnSetIsUniqueCheck
 
 
 if __name__ == "__main__":
