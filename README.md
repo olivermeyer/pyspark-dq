@@ -1,6 +1,7 @@
 # pysparkdq
 
-PoC for a simple columnar validation framework for PySpark DataFrames.
+`pysparkdq` is a lightweight columnar validation framework for
+PySpark DataFrames.
 
 The framework is based largely on Amazon's Deequ package; it is to some
 extent a highly simplified, Python-translated Deequ minus the stateful
