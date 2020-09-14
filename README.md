@@ -7,9 +7,12 @@ The framework is based largely on Amazon's Deequ package; it is to some
 extent a highly simplified, Python-translated Deequ minus the stateful
 statistical modelling part.
 
-The framework is built around two core concepts:
-* The `CheckOperator` orchestrates and runs validations on a provided
-DataFrame, returning valid and invalid rows as two DataFrames.
+The framework is built around three core objects:
+* The `CheckOperator` collects a DataFrame and one or more `Check`
+objects, and instructs a `DataFrameValidator` to run the checks on the
+DataFrame.
+* The `DataFrameValidator` runs the checks on the DataFrame and returns
+two DataFrames: one containing valid rows; the other invalid rows.
 * The `Check` objects define columnar validations to apply to a
 DataFrame.
 
@@ -21,8 +24,7 @@ pattern looks like:
 *(not covered by the framework)*
 1. Create a `CheckOperator` with this DataFrame as parameter
 1. Add any number of `Check` objects to the `CheckOperator`
-1. Run the validations; the `CheckOperator` returns valid and invalid
-rows
+1. Run the checks
 1. Write invalid rows to a retention area; make valid rows available
 for further processing *(not covered by the framework)*
 
@@ -49,7 +51,7 @@ check_operator.add_check(
 		["id", "country"]
 	)
 )
-valid_df, invalid_df = check_operator.run_and_return()
+valid_df, invalid_df = check_operator.run()
 valid_df.write.parquet("s3a://path/to/output")
 invalid_df.write.parquet("s3a://path/to/retention/area")
 ```
@@ -77,11 +79,10 @@ And a validation rule stating that `name` should not be null (i.e.
 The name of the additional column is defined in the corresponding
 `Check` object. The additional columns are included in the invalid rows
 DataFrame, but not in the valid rows DataFrame returned by the
-`CheckOperator`.
+`DataFrameValidator`.
 
 ## Next steps and possible improvements
 * Write test cases for `CheckOperator`
-* Refactor `CheckOperator` - naming and logic are not optimal
 * Make the framework capable of reading/writing data; the expected gain
 is to enable config-only usage
 * Rename `is_positive` to `is_not_negative`

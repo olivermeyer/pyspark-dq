@@ -52,7 +52,7 @@ if __name__ == "__main__":
             ["id", "country"]
         )
     )
-    valid_df, invalid_df = check_operator.run_and_return()
+    valid_df, invalid_df = check_operator.run()
     # do something with valid_df and invalid_df
     print(valid_df.show())
     print(invalid_df.show())
