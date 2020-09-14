@@ -2,7 +2,7 @@ from typing import Tuple
 
 from pyspark.sql.dataframe import DataFrame
 
-from pysparkdq.runner import DataFrameValidator
+from pysparkdq.validator import DataFrameValidator
 from pysparkdq.checks.base import BaseCheck
 
 
