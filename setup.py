@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pysparkdq",
-    version="0.0.3",
+    version="0.0.4",
     author="Oliver Meyer",
     author_email="meyer.oliver93@gmail.com",
     description="Lightweight PySpark DataFrame validation framework",
@@ -16,4 +16,5 @@ setuptools.setup(
         "pyspark>=2.1.2"
     ],
     python_requires='>=3.7',
+    packages=setuptools.find_packages()
 )
