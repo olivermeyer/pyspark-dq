@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Tuple
 
 from pyspark.sql.dataframe import DataFrame
@@ -11,8 +13,9 @@ class CheckOperator:
         self.dataframe = dataframe
         self.checks = []
 
-    def add_check(self, check: BaseCheck) -> None:
+    def add_check(self, check: BaseCheck) -> CheckOperator:
         self.checks.append(check)
+        return self
 
     def run(self) -> Tuple[DataFrame, DataFrame]:
         return DataFrameValidator(

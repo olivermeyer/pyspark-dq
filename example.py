@@ -30,24 +30,19 @@ if __name__ == "__main__":
     )
     check_operator = CheckOperator(
         dataframe=df
-    )
-    check_operator.add_check(
+    ).add_check(
         ColumnIsNotNullCheck("id"),
-    )
-    check_operator.add_check(
+    ).add_check(
         ColumnIsPositiveCheck("age")
-    )
-    check_operator.add_check(
+    ).add_check(
         ColumnIsInValuesCheck(
             "country", ["DE", "GB"]
         )
-    )
-    check_operator.add_check(
+    ).add_check(
         ColumnIsInRangeCheck(
             "weight", 10, 30
         )
-    )
-    check_operator.add_check(
+    ).add_check(
         ColumnSetIsUniqueCheck(
             ["id", "country"]
         )
