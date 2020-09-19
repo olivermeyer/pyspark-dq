@@ -34,19 +34,15 @@ In code:
 df = spark.read.parquet("s3a://path/to/input")
 check_operator = CheckOperator(
 	dataframe=df
-)
-check_operator.add_check(
+).add_check(
 	ColumnIsNotNullCheck("id"),
-)
-check_operator.add_check(
+).add_check(
 	ColumnIsPositiveCheck("age")
-)
-check_operator.add_check(
+).add_check(
 	ColumnIsInValuesCheck(
 		"country", ["DE", "GB"]
 	)
-)
-check_operator.add_check(
+).add_check(
 	ColumnSetIsUniqueCheck(
 		["id", "country"]
 	)
