@@ -1,6 +1,6 @@
-setup: clean venv deps dev-deps
+setup-dev: venv deps dev-deps
 
-clean:
+clean-dev:
 	rm -r venv/
 
 venv:
@@ -15,10 +15,10 @@ dev-deps:
 test:
 	pytest tests/
 
-dist:
+build:
 	python setup.py sdist bdist_wheel
 	twine upload dist/*
 
-clean-dist:
+clean-build:
 	rm -rf dist/
 	rm -rf build/
