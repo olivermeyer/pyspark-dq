@@ -1,5 +1,3 @@
-import pandas as pd
-
 from pytest import raises
 
 from pyspark.sql.types import (
@@ -15,7 +13,7 @@ from pysparkdq.checks.is_in_values import ColumnIsInValuesCheck
 from tests.utils import SparkTestCase
 
 
-class ColumnIsNotNullCheckTest(SparkTestCase):
+class ColumnIsInValuesCheckTest(SparkTestCase):
     def setUp(self):
         SparkTestCase.setUp(self)
         self.check = ColumnIsInValuesCheck("foo", ["a"])
@@ -44,9 +42,9 @@ class ColumnIsNotNullCheckTest(SparkTestCase):
                 StructField("foo", StringType()),
                 StructField("foo_is_in_allowed_values", BooleanType(), False),
             ])
-        ).toPandas()
-        output_df = self.check.run(input_df).toPandas()
-        pd.testing.assert_frame_equal(expected_df, output_df)
+        )
+        output_df = self.check.run(input_df)
+        self.assert_frame_equal(expected_df, output_df)
 
     def test_run_missing_column(self):
         """Test that running on a missing field throws an error"""

@@ -12,8 +12,15 @@ deps:
 dev-deps:
 	venv/bin/pip install -r test-requirements.txt
 
-test:
-	pytest tests/
+test: test-unit test-integration
+
+test-unit:
+	@echo "Running unit tests"
+	pytest tests/unit/ --disable-warnings
+
+test-integration:
+	@echo "Running integration tests"
+	pytest tests/integration/ --disable-warnings
 
 build:
 	python setup.py sdist bdist_wheel

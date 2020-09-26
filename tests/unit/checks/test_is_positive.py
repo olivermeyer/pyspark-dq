@@ -1,5 +1,3 @@
-import pandas as pd
-
 from pytest import raises
 
 from pyspark.sql.types import (
@@ -48,9 +46,9 @@ class ColumnIsPositiveCheckTest(SparkTestCase):
                 StructField("foo", IntegerType()),
                 StructField("foo_is_positive", BooleanType(), False),
             ])
-        ).toPandas()
-        output_df = self.check.run(input_df).toPandas()
-        pd.testing.assert_frame_equal(expected_df, output_df)
+        )
+        output_df = self.check.run(input_df)
+        self.assert_frame_equal(expected_df, output_df)
 
     def test_run_missing_column(self):
         """Test that running on a missing field throws an error"""
