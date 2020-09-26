@@ -16,5 +16,3 @@ class SparkTestCase(TestCase):
 
     def tearDown(self):
         self.spark.stop()
-
-
