@@ -13,7 +13,7 @@ dev-deps:
 	venv/bin/pip install -r test-requirements.txt
 
 test:
-	pytest tests/
+	pytest tests/ --disable-warnings
 
 build:
 	python setup.py sdist bdist_wheel
