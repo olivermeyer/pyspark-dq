@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 
 from pysparkdq.operator import CheckOperator
 from pysparkdq.checks.is_not_null import ColumnIsNotNullCheck
-from pysparkdq.checks.is_positive import ColumnIsPositiveCheck
+from pysparkdq.checks.is_not_negative import ColumnIsNotNegativeCheck
 from pysparkdq.checks.is_in_values import ColumnIsInValuesCheck
 from pysparkdq.checks.is_in_range import ColumnIsInRangeCheck
 from pysparkdq.checks.is_unique import ColumnSetIsUniqueCheck
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     ).add_check(
         ColumnIsNotNullCheck("id"),
     ).add_check(
-        ColumnIsPositiveCheck("age")
+        ColumnIsNotNegativeCheck("age")
     ).add_check(
         ColumnIsInValuesCheck(
             "country", ["DE", "GB"]

@@ -37,7 +37,7 @@ check_operator = CheckOperator(
 ).add_check(
 	ColumnIsNotNullCheck("id"),
 ).add_check(
-	ColumnIsPositiveCheck("age")
+	ColumnIsNotNegativeCheck("age")
 ).add_check(
 	ColumnIsInValuesCheck(
 		"country", ["DE", "GB"]
@@ -78,7 +78,6 @@ DataFrame, but not in the valid rows DataFrame returned by the
 `DataFrameValidator`.
 
 ## Next steps and possible improvements
-* Write test cases for `CheckOperator`
 * Make the framework capable of reading/writing data; the expected gain
 is to enable config-only usage
 * Rename `is_positive` to `is_not_negative`

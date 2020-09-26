@@ -2,7 +2,7 @@ from pysparkdq.operator import CheckOperator
 from pysparkdq.checks.is_in_range import ColumnIsInRangeCheck
 from pysparkdq.checks.is_in_values import ColumnIsInValuesCheck
 from pysparkdq.checks.is_not_null import ColumnIsNotNullCheck
-from pysparkdq.checks.is_positive import ColumnIsPositiveCheck
+from pysparkdq.checks.is_not_negative import ColumnIsNotNegativeCheck
 from pysparkdq.checks.is_unique import ColumnSetIsUniqueCheck
 
 
@@ -32,7 +32,7 @@ class IntegrationTest(SparkTestCase):
         ).add_check(
             ColumnIsNotNullCheck("id"),
         ).add_check(
-            ColumnIsPositiveCheck("age")
+            ColumnIsNotNegativeCheck("age")
         ).add_check(
             ColumnIsInValuesCheck(
                 "country", ["DE", "GB"]
@@ -72,7 +72,7 @@ class IntegrationTest(SparkTestCase):
             ],
             schema=columns + [
                 "id_is_not_null",
-                "age_is_positive",
+                "age_is_not_negative",
                 "country_is_in_allowed_values",
                 "weight_is_in_range",
                 "id_country_is_unique_identifier"
@@ -83,4 +83,3 @@ class IntegrationTest(SparkTestCase):
             output_invalid_df, columns,
             expected_invalid_df, columns
         )
-

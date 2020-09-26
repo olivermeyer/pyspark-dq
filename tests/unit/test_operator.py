@@ -3,7 +3,7 @@ import pytest
 from pyspark.sql import DataFrame
 from pysparkdq.operator import CheckOperator
 from pysparkdq.checks.is_not_null import ColumnIsNotNullCheck
-from pysparkdq.checks.is_positive import ColumnIsPositiveCheck
+from pysparkdq.checks.is_not_negative import ColumnIsNotNegativeCheck
 from pysparkdq.exceptions import (
     InvalidCheckTypeException,
     InvalidDataFrameException
@@ -22,7 +22,7 @@ def check_operator():
 
 def test_add_check(check_operator):
     check_operator.add_check(ColumnIsNotNullCheck("foo"))
-    check_operator.add_check(ColumnIsPositiveCheck("bar"))
+    check_operator.add_check(ColumnIsNotNegativeCheck("bar"))
     assert len(check_operator.checks) == 2
 
 

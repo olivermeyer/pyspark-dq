@@ -4,13 +4,13 @@ from pyspark.sql.dataframe import DataFrame
 from pysparkdq.checks.base import BaseCheck
 
 
-class ColumnIsPositiveCheck(BaseCheck):
+class ColumnIsNotNegativeCheck(BaseCheck):
     def __init__(self, column: str) -> None:
         self.column = column
 
     @property
     def validation_column(self) -> str:
-        return f"{self.column}_is_positive"
+        return f"{self.column}_is_not_negative"
 
     def run(self, dataframe: DataFrame) -> DataFrame:
         return dataframe.withColumn(

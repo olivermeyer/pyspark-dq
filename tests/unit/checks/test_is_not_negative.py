@@ -8,19 +8,19 @@ from pyspark.sql.types import (
 )
 from pyspark.sql.utils import AnalysisException
 
-from pysparkdq.checks.is_positive import ColumnIsPositiveCheck
+from pysparkdq.checks.is_not_negative import ColumnIsNotNegativeCheck
 
 from tests.utils import SparkTestCase
 
 
-class ColumnIsPositiveCheckTest(SparkTestCase):
+class ColumnIsNotNegativeCheckTest(SparkTestCase):
     def setUp(self):
         SparkTestCase.setUp(self)
-        self.check = ColumnIsPositiveCheck("foo")
+        self.check = ColumnIsNotNegativeCheck("foo")
 
     def test_validation_column(self):
         """Test the name of the validation column"""
-        assert self.check.validation_column == "foo_is_positive"
+        assert self.check.validation_column == "foo_is_not_negative"
 
     def test_run(self):
         """Test expected execution"""
@@ -44,7 +44,7 @@ class ColumnIsPositiveCheckTest(SparkTestCase):
             ],
             schema=StructType([
                 StructField("foo", IntegerType()),
-                StructField("foo_is_positive", BooleanType(), False),
+                StructField("foo_is_not_negative", BooleanType(), False),
             ])
         )
         output_df = self.check.run(input_df)
