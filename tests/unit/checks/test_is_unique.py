@@ -1,5 +1,3 @@
-import pandas as pd
-
 from pytest import raises
 
 from pyspark.sql.types import (
@@ -12,10 +10,7 @@ from pyspark.sql.utils import AnalysisException
 
 from pysparkdq.checks.is_unique import ColumnSetIsUniqueCheck
 
-from tests.utils import (
-    SparkTestCase,
-    sort_dataframe
-)
+from tests.utils import SparkTestCase
 
 
 class ColumnSetIsUniqueCheckTest(SparkTestCase):
@@ -55,12 +50,11 @@ class ColumnSetIsUniqueCheckTest(SparkTestCase):
                     "foo_bar_is_unique_identifier", BooleanType(), False
                 ),
             ])
-        ).toPandas()
-        output_df = self.check.run(input_df).toPandas()
-        pd.testing.assert_frame_equal(
-            sort_dataframe(expected_df, ["foo", "bar"]),
-            sort_dataframe(output_df, ["foo", "bar"]),
-            check_like=True
+        )
+        output_df = self.check.run(input_df)
+        self.assert_frame_equal_sorted(
+            expected_df, ["foo", "bar"],
+            output_df, ["foo", "bar"]
         )
 
     def test_run_missing_column(self):
