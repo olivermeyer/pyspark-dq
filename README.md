@@ -80,6 +80,4 @@ DataFrame, but not in the valid rows DataFrame returned by the
 ## Next steps and possible improvements
 * Make the framework capable of reading/writing data; the expected gain
 is to enable config-only usage
-* Rename `is_positive` to `is_not_negative`
-(`is_positive` is misleading for zero)
 * Add logging
